@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ramp_assembled">
+
+    <xacro:include filename="$(find obstacles)/urdf/primitives/colors.xacro"/>
+    <xacro:include filename="$(find obstacles)/urdf/primitives/ramp.xacro"/>
+
+    <link name="base_link">
+    </link>
+
+    <xacro:property name="seg1_angle" value="10"/>
+    <xacro:property name="seg1_length" value="2"/>
+    <xacro:property name="seg1_width" value="2"/>
+    <xacro:property name="seg1_offset_x" value="0.0"/>
+    <xacro:property name="seg1_offset_z" value="0.0"/>
+
+    <xacro:property name="seg2_angle" value="0"/>
+    <xacro:property name="seg2_length" value="2"/>
+    <xacro:property name="seg2_width" value="2"/>
+    <xacro:property name="seg2_offset_x" value="${seg1_offset_x + seg1_length*cos(seg1_angle*pi/180)}"/>
+    <xacro:property name="seg2_offset_z" value="${seg1_offset_z + seg1_length*sin(seg1_angle*pi/180)}"/>
+
+    <xacro:property name="seg3_angle" value="-10"/>
+    <xacro:property name="seg3_length" value="2"/>
+    <xacro:property name="seg3_width" value="2"/>
+    <xacro:property name="seg3_offset_x" value="${seg2_offset_x + seg2_length*cos(seg2_angle*pi/180)}"/>
+    <xacro:property name="seg3_offset_z" value="${seg2_offset_z + seg2_length*sin(seg2_angle*pi/180)}"/>
+
+    <xacro:ramp_segment postfix="seg1" angle="${seg1_angle}" length="${seg1_length}" width="${seg1_width}" offset_x="${seg1_offset_x}" offset_z="${seg1_offset_z}"/>
+    <xacro:ramp_segment postfix="seg2" angle="${seg2_angle}" length="${seg2_length}" width="${seg2_width}" offset_x="${seg2_offset_x}" offset_z="${seg2_offset_z}"/>
+    <xacro:ramp_segment postfix="seg3" angle="${seg3_angle}" length="${seg3_length}" width="${seg3_width}" offset_x="${seg3_offset_x}" offset_z="${seg3_offset_z}"/>
+
+</robot>
