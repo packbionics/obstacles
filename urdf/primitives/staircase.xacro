@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="staircase">
+
+    <xacro:include filename="colors.xacro"/>
+
+    <xacro:macro name="staircase_segment" params="postfix quantity height depth width offset_x offset_z">
+        <link name="staircase_${postfix}_${quantity-1}">
+            <visual>
+                <geometry>
+                    <box size="${depth} ${width} ${height if height >= 0 else -height}"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${depth} ${width} ${height if height >= 0 else -height}"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="staircase_joint_${postfix}_${quantity-1}" type="fixed">
+            <parent link="base_link"/>
+            <child link="staircase_${postfix}_${quantity-1}"/>
+            <!-- /2 offset needed for staircase to be fully above ground and aligned with other segments-->
+            <origin xyz="${offset_x + depth/2} 0 ${offset_z + height/2}" rpy="0 0 0"/>
+        </joint>
+
+        <!-- create staircases recursively, use quantity-1 because recursion stops at zero-->
+        <xacro:if value="${quantity-1}">
+            <xacro:staircase_segment postfix="${postfix}" quantity="${quantity-1}" height="${height}" depth="${depth}" width="${width}" offset_x="${offset_x+depth}" offset_z="${offset_z+height}"/>
+        </xacro:if>
+    </xacro:macro>
+</robot>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="staircase_assembled">
+    <xacro:include filename="../primitives/staircase.xacro"/>
+
+    <link name="base_link">
+    </link>
+
+    <xacro:property name="seg1_quantity" value="3"/>
+    <xacro:property name="seg1_height" value="0.1"/>
+    <xacro:property name="seg1_depth" value="0.2"/>
+    <xacro:property name="seg1_width" value="0.5"/>
+    <xacro:property name="seg1_offset_x" value="0.0"/>
+    <xacro:property name="seg1_offset_z" value="0.0"/>
+
+    <xacro:property name="seg2_quantity" value="3"/>
+    <xacro:property name="seg2_height" value="0.05"/>
+    <xacro:property name="seg2_depth" value="0.2"/>
+    <xacro:property name="seg2_width" value="0.5"/>
+    <xacro:property name="seg2_offset_x" value="${seg1_offset_x + seg1_depth*seg1_quantity}"/>
+    <xacro:property name="seg2_offset_z" value="${seg1_offset_z + seg1_height*seg1_quantity}"/>
+
+    <xacro:property name="seg3_quantity" value="3"/>
+    <xacro:property name="seg3_height" value="-0.1"/>
+    <xacro:property name="seg3_depth" value="0.2"/>
+    <xacro:property name="seg3_width" value="0.5"/>
+    <xacro:property name="seg3_offset_x" value="${seg2_offset_x + seg2_depth*seg2_quantity}"/>
+    <xacro:property name="seg3_offset_z" value="${seg2_offset_z + seg2_height*seg2_quantity}"/>
+
+    <xacro:staircase_segment postfix="seg1" quantity="${seg1_quantity}" height="${seg1_height}" depth="${seg1_depth}" width="${seg1_width}" offset_x="${seg1_offset_x}" offset_z="${seg1_offset_z}"/>
+    <xacro:staircase_segment postfix="seg2" quantity="${seg2_quantity}" height="${seg2_height}" depth="${seg2_depth}" width="${seg2_width}" offset_x="${seg2_offset_x}" offset_z="${seg2_offset_z}"/>
+    <xacro:staircase_segment postfix="seg3" quantity="${seg3_quantity}" height="${seg3_height}" depth="${seg3_depth}" width="${seg3_width}" offset_x="${seg3_offset_x}" offset_z="${seg3_offset_z}"/>
+</robot>
