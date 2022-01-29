@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ramp">
+    
+    <xacro:macro name="ramp_segment" params="postfix angle length width offset_x offset_z">
+
+
+        <xacro:property name="thickness" value="0.02"/>
+        <xacro:property name="theta" value="${-angle*pi/180}"/>
+        <link name="ramp_${postfix}">
+            <visual>
+                <geometry>
+                    <box size="${length} ${width} ${thickness}"/>
+                </geometry>
+                <material name="white"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="${length} ${width} ${thickness}"/>
+                </geometry>
+            </collision>
+        </link>
+        <joint name="ramp_joint_${postfix}" type="fixed">
+            <parent link="base_link"/>
+            <child link="ramp_${postfix}"/>
+            <origin xyz="${offset_x + length*cos(theta)/2} 0 ${offset_z - length*sin(theta)/2 - thickness*cos(theta)/2}" rpy="0 ${theta} 0"/>
+        </joint>
+    </xacro:macro>
+
+</robot>

@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="staircase">
 
-    <xacro:include filename="colors.xacro"/>
-
     <xacro:macro name="staircase_segment" params="postfix quantity height depth width offset_x offset_z">
         <link name="staircase_${postfix}_${quantity-1}">
             <visual>

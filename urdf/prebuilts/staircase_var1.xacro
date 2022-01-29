@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="staircase_var1">
+
+    <xacro:include filename="$(find obstacles)/urdf/primitives/colors.xacro"/>
+    <xacro:include filename="$(find obstacles)/urdf/primitives/staircase.xacro"/>
+
+    <!-- base_link is not included in this file because it is meant to be integrated with other robots -->
+
+    <xacro:macro name="staircase_var1" params="postfix offset_x offset_z">
+
+        <xacro:property name="seg1_quantity" value="10"/>
+        <xacro:property name="seg1_height" value="0.1"/>
+        <xacro:property name="seg1_depth" value="0.2"/>
+        <xacro:property name="seg1_width" value="1"/>
+        <xacro:property name="seg1_offset_x" value="${offset_x}"/>
+        <xacro:property name="seg1_offset_z" value="${offset_z}"/>
+
+        <xacro:property name="seg2_quantity" value="10"/>
+        <xacro:property name="seg2_height" value="-0.1"/>
+        <xacro:property name="seg2_depth" value="0.2"/>
+        <xacro:property name="seg2_width" value="1"/>
+        <xacro:property name="seg2_offset_x" value="${seg1_offset_x + seg1_depth*seg1_quantity}"/>
+        <xacro:property name="seg2_offset_z" value="${seg1_offset_z + seg1_height*seg1_quantity}"/>
+
+        <xacro:staircase_segment postfix="seg1" quantity="${seg1_quantity}" height="${seg1_height}" depth="${seg1_depth}" width="${seg1_width}" offset_x="${seg1_offset_x}" offset_z="${seg1_offset_z}"/>
+        <xacro:staircase_segment postfix="seg2" quantity="${seg2_quantity}" height="${seg2_height}" depth="${seg2_depth}" width="${seg2_width}" offset_x="${seg2_offset_x}" offset_z="${seg2_offset_z}"/>
+    </xacro:macro>
+</robot>
