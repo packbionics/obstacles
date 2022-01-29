@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="staircase_assembled">
-    <xacro:include filename="../primitives/staircase.xacro"/>
+    <xacro:include filename="$(find obstacles)/urdf/primitives/staircase.xacro"/>
 
     <link name="base_link">
     </link>
