@@ -5,8 +5,6 @@
     <xacro:include filename="$(find obstacles)/urdf/primitives/staircase.xacro"/>
 
     <!-- base_link is not included in this file because it is meant to be integrated with other robots -->
-    <link name="base_link">
-    </link>
 
     <xacro:macro name="staircase_var1" params="postfix offset_x offset_z">
 
